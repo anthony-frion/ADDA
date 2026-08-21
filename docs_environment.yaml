@@ -1,0 +1,14 @@
+name: mdml_docs
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.9
+  - pip
+  - setuptools_scm
+  - sphinx<7.0.0
+  - sphinx-autoapi
+  - pip:
+      - sphinx-typo3-theme # sphinx theme
+      - seed-intersphinx-mapping

@@ -1,0 +1,104 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "adda"
+dynamic = ["version", "readme"]
+authors = [
+  { name="m-dml working group", email="mlhzg@googlegroups.com" },
+]
+description = "Common data assimilation tools we use in our projects at m-dml."
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Operating System :: OS Independent",
+]
+
+
+[project.urls]
+"Homepage" = "https://codebase.helmholtz.cloud/m-dml/adda"
+"Bug Tracker" = "https://codebase.helmholtz.cloud/m-dml/adda/-/issues"
+
+
+#[project.scripts]
+#my-client = "mdml_tools.scipts.convert2hydra:__main__"
+
+
+[tool.setuptools]
+packages = ["adda"]
+
+
+[tool.setuptools_scm]
+write_to = "adda/_version.py"
+
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.rst"]}
+
+
+[tool.vulture]
+exclude = ["conf/", "data/", "docs/", "notebooks/", "output*/", "logs/", "tests/"]
+make_whitelist = false
+min_confidence = 80
+paths = ["adda/"]
+sort_by_size = true
+verbose = false
+ignore_names = ["args", "kwargs"]
+
+
+[tool.pylint]
+max-line-length = 120
+exclude-protected = ["_asdict", "_fields", "_replace", "_source", "_make", "_target_"]
+logging-format-style = "new"
+disable=[
+    "logging-fstring-interpolation",
+    "too-many-branches",
+    "too-many-statements",
+    "logging-fstring-interpolation",
+    "too-many-locals",
+    "unspecified-encoding",
+    "too-many-ancestors",
+    "too-many-instance-attributes",
+    "too-many-public-methods",
+    "too-many-arguments",
+    "missing-module-docstring",  # docstrings are handled by interrogate, so we don't need pylint to check them again
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "eval-used",
+    "no-member",
+    "use-dict-literal",
+    "anomalous-backslash-in-string",
+    "too-many-lines",
+    "too-few-public-methods",
+    "invalid-name",
+    "duplicate-code",
+]
+good-names=["lr", "i", "j", "k", "t0", "df", "p", "q", "register_kl", "kl_divergence", "f"]
+generated-members=["torch.*"]
+ignore = ["tests", "_version.py", "docs", "notebooks", "data", "conf", "output*", "logs", "build"]
+
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = true
+ignore-module = true
+fail-under = 90
+generate-badge = "./interrogate.svg"
+badge-format = "svg"
+verbose = 1
+color = true
+exclude = ["setup.py", "docs", "build", "tests"]
+
+
+[tool.isort]
+profile = "black"
+src_paths = ["datools", "tests"]
+line_length = 120
+force_alphabetical_sort_within_sections = true
+
+
+[tool.black]
+line-length = 120
+target-version = ['py39', 'py310']
