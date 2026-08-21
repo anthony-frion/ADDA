@@ -41,7 +41,7 @@ To install you have to clone the repository and install it with pip:
 
 .. code-block:: bash
 
-   git clone https://codebase.helmholtz.cloud/m-dml/adda.git
+   git clone https://github.com/anthony-frion/ADDA
    cd adda
    pip install -e .
 
